@@ -16,10 +16,17 @@ class World {
         return all.filter { it.distanceTo(point) <= distance && it != point }
     }
 
+    fun isConflictPosition(circle: Circle, exclude: Point? = null): Boolean {
+        return all.find { circle.distanceTo(it) < it.r + circle.r && it != exclude } != null
+    }
+
     fun update(delta: Float) {
 
         for (hero in heroes) {
-            (controllers[hero.id] ?: defaultController).control(this, hero)
+            if (!controllers.containsKey(hero.id)) {
+                controllers[hero.id] = SimpleRandomHeroController()
+            }
+            controllers[hero.id]?.control(this, hero)
         }
 
         for (hero in heroes) {
@@ -28,7 +35,9 @@ class World {
     }
 
     fun addHero(hero: Hero) {
-        all += hero
-        heroes += hero
+        if(!isConflictPosition(hero)) {
+            all += hero
+            heroes += hero
+        }
     }
 }

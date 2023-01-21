@@ -1,6 +1,7 @@
 package ru.lytvest.game
 
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -13,17 +14,20 @@ interface Movies : Circle {
 
 
 
-    fun move(world: World, delta: Float) {
+    fun move(world: World, delta: Float): Boolean {
         val dis = speed * delta
-        val objs = world.allObjects(this, dis + r)
-        if (objs.isEmpty()) {
-            move(dis)
+        val next = nextPosition(dis)
+
+        if (!world.isConflictPosition(next, this)) {
+            x = next.x
+            y = next.y
+            return true
         }
+        return false
     }
 
-    private fun move(dis: Float) {
-        x += dis * sin(way)
-        y += dis * cos(way)
+    private fun nextPosition(dis: Float): Circle {
+        return Circle.create(x + dis * sin(way), y + dis * cos(way), r)
     }
 
     companion object {
@@ -33,5 +37,15 @@ interface Movies : Circle {
         const val RIGHT = pi / 2
         const val DOWN = pi
         const val UP = 0f
+
+
+        fun Float.equalsAngle(angle: Float, pr: Float = pi / 4f): Boolean {
+            return abs(angle - this) <= pr
+        }
+
+        fun isRight(angle: Float) = RIGHT.equalsAngle(angle)
+        fun isLeft(angle: Float) = LEFT.equalsAngle(angle)
+        fun isDown(angle: Float) = DOWN.equalsAngle(angle)
+        fun isUp(angle: Float) = UP.equalsAngle(angle)
     }
 }

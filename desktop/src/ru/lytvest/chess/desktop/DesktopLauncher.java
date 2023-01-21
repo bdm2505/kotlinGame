@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		settings.maxWidth = 2048;
 		settings.maxHeight = 2048;
 
-		TexturePacker.process(settings, "../../source",".","skin.atlas");
+//		TexturePacker.process(settings, "../../source",".","skin.atlas");
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 16 * 80; // 16 * 90;

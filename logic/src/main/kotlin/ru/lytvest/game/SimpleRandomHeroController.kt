@@ -3,7 +3,7 @@ package ru.lytvest.game
 import kotlin.random.Random
 
 
-class SimpleRandomHeroController(val percent: Float = 0.1f) : HeroController {
+class SimpleRandomHeroController(val percent: Float = 0.01f) : HeroController {
 
     var speedPercent = Random.nextFloat()
     var wayHero = Random.nextFloat() * 2 * Movies.pi - Movies.pi
