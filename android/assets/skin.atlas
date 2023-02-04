@@ -4,6 +4,13 @@ size: 2048, 2048
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+TexturedGrass
+  rotate: false
+  xy: 1658, 325
+  size: 48, 32
+  orig: 48, 32
+  offset: 0, 0
+  index: -1
 badlogic
   rotate: false
   xy: 516, 2
@@ -20,14 +27,14 @@ bg
   index: -1
 default
   rotate: false
-  xy: 1799, 1911
+  xy: 2, 6
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 fon
   rotate: false
-  xy: 695, 825
+  xy: 774, 244
   size: 14, 14
   split: 3, 3, 2, 2
   orig: 14, 14
@@ -38,6 +45,20 @@ grass
   xy: 2, 40
   size: 512, 218
   orig: 512, 218
+  offset: 0, 0
+  index: -1
+hp-bar-green
+  rotate: false
+  xy: 695, 833
+  size: 50, 6
+  orig: 50, 6
+  offset: 0, 0
+  index: -1
+hp-bar-red
+  rotate: false
+  xy: 1106, 281
+  size: 50, 6
+  orig: 50, 6
   offset: 0, 0
   index: -1
 play-button
@@ -89,6 +110,13 @@ stop-pressed
   orig: 550, 550
   offset: 0, 0
   index: -1
+tree
+  rotate: false
+  xy: 1799, 1879
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: -1
 user
   rotate: false
   xy: 1106, 289
@@ -98,7 +126,7 @@ user
   index: -1
 white
   rotate: false
-  xy: 1106, 286
+  xy: 1799, 1876
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

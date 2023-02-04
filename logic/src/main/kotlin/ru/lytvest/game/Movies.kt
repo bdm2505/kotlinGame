@@ -1,17 +1,15 @@
 package ru.lytvest.game
 
-import kotlin.math.PI
-import kotlin.math.abs
 import kotlin.math.cos
+import kotlin.math.min
 import kotlin.math.sin
 
 interface Movies : Circle {
     override var x: Float
     override var y: Float
-    val speed: Float
-    val way: Float
-
-
+    var speed: Float
+    var way: Float
+    var speedMax: Float
 
 
     fun move(world: World, delta: Float): Boolean {
@@ -26,26 +24,33 @@ interface Movies : Circle {
         return false
     }
 
-    private fun nextPosition(dis: Float): Circle {
-        return Circle.create(x + dis * sin(way), y + dis * cos(way), r)
+    fun nextPosition(dis: Float, targetWay: Float = way): Circle {
+        return Circle.create(x + dis * sin(targetWay), y + dis * cos(targetWay), r)
     }
 
-    companion object {
-        const val pi = PI.toFloat()
+    fun rayCollisionWithCircle(targetWay: Float, dis: Float, start: Point, end: Circle): Boolean {
+        val d = start.distanceTo(end)
 
-        const val LEFT = - pi / 2
-        const val RIGHT = pi / 2
-        const val DOWN = pi
-        const val UP = 0f
+        if (d - end.r > dis)
+            return false
 
+        val next = nextPosition(min(d, dis), targetWay)
 
-        fun Float.equalsAngle(angle: Float, pr: Float = pi / 4f): Boolean {
-            return abs(angle - this) <= pr
-        }
-
-        fun isRight(angle: Float) = RIGHT.equalsAngle(angle)
-        fun isLeft(angle: Float) = LEFT.equalsAngle(angle)
-        fun isDown(angle: Float) = DOWN.equalsAngle(angle)
-        fun isUp(angle: Float) = UP.equalsAngle(angle)
+        return next.distanceTo(end) <= end.r
     }
+
+
+}
+
+fun main() {
+    val world = World()
+    val hero = Hero()
+    hero.speed = 5f
+    hero.way = Circle.LEFT
+    world.add(hero)
+
+    world.update(0.1f)
+    world.update(0.1f)
+    world.update(0.1f)
+    world.update(0.1f)
 }
