@@ -23,3 +23,22 @@ class Tree : Obj(), WithHp, Circle {
 
 
 }
+
+fun main() {
+    val world = World()
+    val hero = Hero()
+    world.add(hero)
+
+    val tree = Tree().apply {
+        x = 2f
+        r = 0.7f
+    }
+    world.add(tree)
+
+    hero.way = Circle.RIGHT
+
+    hero.startAttack(world)
+    hero.endAttack(world)
+
+    println("$hero $tree")
+}

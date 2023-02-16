@@ -28,11 +28,11 @@ class Hero : Movies, Circle, Obj(), WithHp {
         speed = 0f
     }
 
-    fun attackedEnemies(world: World, func: (Hero) -> Unit) {
+    fun attackedEnemies(world: World, func: (WithHp) -> Unit) {
         val enemies = world.allObjects(this, r + attackDistance)
 
         for (enemy in enemies) {
-            if (enemy is Hero && (rayCollisionWithCircle(way, r + attackDistance, this, enemy) ||
+            if (enemy is WithHp && (rayCollisionWithCircle(way, r + attackDistance, this, enemy) ||
                         rayCollisionWithCircle(way + Circle.PI_NA_8, r + attackDistance, this, enemy) ||
                         rayCollisionWithCircle(way - Circle.PI_NA_8, r + attackDistance, this, enemy))
             ) {
@@ -41,8 +41,8 @@ class Hero : Movies, Circle, Obj(), WithHp {
         }
     }
 
-    fun attackedEnemiesList(world: World): List<Hero> {
-        val list = mutableListOf<Hero>()
+    fun attackedEnemiesList(world: World): List<WithHp> {
+        val list = mutableListOf<WithHp>()
         attackedEnemies(world) {
             list += it
         }

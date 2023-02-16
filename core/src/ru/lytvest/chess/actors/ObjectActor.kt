@@ -9,7 +9,6 @@ import ru.lytvest.chess.scenes.WorldScene
 import ru.lytvest.game.*
 
 typealias Anims = Array<Animation<TextureRegion>>
-
 open class ObjectActor(
     val sleepAnims: Anims,
     val goAnims: Anims = sleepAnims,
